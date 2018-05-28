@@ -1,0 +1,12 @@
+examples
+scripts
+docs
+.babelrc
+.eslint*
+.editorconfig
+.npmignore
+.travis.yml
+webpack.*
+coverage
+package-lock.json
+yarn.lock
