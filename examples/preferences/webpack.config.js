@@ -1,8 +1,11 @@
 var path = require('path')
 var webpack = require('webpack')
 
+const env = process.env.NODE_ENV
+
 module.exports = {
   devtool: 'eval',
+  mode: env || 'development',
   entry: [
     'babel-polyfill',
     'eventsource-polyfill',
