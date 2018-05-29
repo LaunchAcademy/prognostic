@@ -6,12 +6,7 @@ const env = process.env.NODE_ENV
 module.exports = {
   devtool: 'eval',
   mode: env || 'development',
-  entry: [
-    'babel-polyfill',
-    'eventsource-polyfill',
-    'webpack-hot-middleware/client',
-    './src/index'
-  ],
+  entry: ['babel-polyfill', 'eventsource-polyfill', './src/index'],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -26,16 +21,21 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?/,
-        loaders: ['babel-loader', 'eslint-loader'],
-        include: path.join(__dirname, 'src')
+        exclude: /node_modules/,
+        use: ['babel-loader', 'eslint-loader'],
+        include: [
+          path.join(__dirname, 'src'),
+          //TODO: fix this once modules are working
+          path.join(__dirname, '../../src')
+        ]
       },
       {
         test: /\.json$/,
-        loader: 'json-loader'
+        use: 'json-loader'
       },
       {
         test: /\.md/,
-        loaders: ['html-loader', 'markdown-loader']
+        use: ['html-loader', 'markdown-loader']
       }
     ]
   }

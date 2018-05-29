@@ -6,6 +6,7 @@
   "author": "Dan Pickett",
   "license": "MIT",
   "dependencies": {
+    "classnames": "^2.2.5",
     "invariant": "^2.2.4",
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
@@ -30,6 +31,7 @@
     "eslint-plugin-react": "^7.8.2",
     "husky": "^0.14.3",
     "jest": "^23.0.1",
+    "jest-enzyme": "^6.0.1",
     "lint-staged": "^7.1.2",
     "prettier": "^1.13.0",
     "regenerator-runtime": "^0.11.1"
@@ -37,7 +39,8 @@
   "scripts": {
     "precommit": "lint-staged",
     "test": "node_modules/.bin/jest",
-    "test:dev": "node_modules/.bin/jest --watch --notify"
+    "test:dev": "node_modules/.bin/jest --watch",
+    "test:debug": "node inspect ./node_modules/.bin/jest -i --watch"
   },
   "lint-staged": {
     "*.{js,json,css,md}": [
