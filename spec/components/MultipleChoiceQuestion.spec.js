@@ -24,7 +24,7 @@ describe('MultipleChoiceQuestion', () => {
   }
 
   beforeEach(() => {
-    props = { question, onOptionSelect }
+    props = { question, onOptionSelect, questionIndex: 1 }
     mountedQuestion = questionComp()
   })
 

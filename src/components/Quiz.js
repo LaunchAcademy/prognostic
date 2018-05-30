@@ -4,11 +4,13 @@ import PropTypes from 'prop-types'
 import MultipleChoiceQuestion from './MultipleChoiceQuestion'
 import StartPane from './StartPane'
 
+import { initQuiz, startQuiz, answerQuestion } from '../quiz'
+
 class Quiz extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      questionIndex: -1
+      quiz: initQuiz(props.quiz)
     }
 
     this.onStart = this.onStart.bind(this)
@@ -18,19 +20,18 @@ class Quiz extends Component {
 
   onStart() {
     this.setState({
-      questionIndex: 0
+      quiz: startQuiz(this.props.quiz)
     })
   }
 
-  onOptionSelect(e) {
-    e.preventDefault()
+  onOptionSelect(question, option) {
     this.setState({
-      questionIndex: this.state.questionIndex + 1
+      quiz: answerQuestion(this.state.quiz, question, option)
     })
   }
 
   showStartPane() {
-    return this.state.questionIndex === -1
+    return this.state.quiz.questionIndex === -1
   }
 
   buildQuestionComponents() {
@@ -40,8 +41,9 @@ class Quiz extends Component {
       const newComponent = (
         <MultipleChoiceQuestion
           key={i}
-          active={this.state.questionIndex === i}
+          active={this.state.quiz.questionIndex === i}
           onOptionSelect={this.onOptionSelect}
+          questionIndex={i}
           question={questions[i]}
         />
       )

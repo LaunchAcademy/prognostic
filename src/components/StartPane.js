@@ -4,7 +4,7 @@ import classnames from 'classnames'
 
 const StartPane = props => {
   const classes = {
-    'start-pane': true,
+    'quiz-start-pane': true,
     hidden: !props.active
   }
   return (

@@ -1,36 +1,60 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import OptionListItem from './OptionListItem'
 import classnames from 'classnames'
 
-const makeListItems = (options, callback) => {
-  let i = 0
-  return options.map(option => {
-    i++
-    return <OptionListItem key={i} onOptionSelect={callback} option={option} />
-  })
-}
-
-const MultipleChoiceQuestion = props => {
-  const { text, options } = props.question
-  const optionComponents = makeListItems(options, props.onOptionSelect)
-
-  const classes = {
-    'quiz-question': true,
-    hidden: !props.active
+class MultipleChoiceQuestion extends Component {
+  constructor(props) {
+    super(props)
+    this.optionSelect = this.optionSelect.bind(this)
+    this.makeListItems = this.makeListItems.bind(this)
   }
 
-  return (
-    <div className={classnames(classes)}>
-      <h2>{text}</h2>
+  optionSelect(option) {
+    if (this.props.onOptionSelect) {
+      this.props.onOptionSelect(this.props.question, option)
+    }
+  }
 
-      <ul>{optionComponents}</ul>
-    </div>
-  )
+  makeListItems(options) {
+    let i = 0
+    return options.map(option => {
+      i++
+      return (
+        <OptionListItem
+          key={i}
+          onOptionSelect={this.optionSelect}
+          option={option}
+        />
+      )
+    })
+  }
+
+  render() {
+    const { text, options } = this.props.question
+    const optionComponents = this.makeListItems(
+      options,
+      this.props.onOptionSelect
+    )
+
+    const classes = {
+      'quiz-question': true,
+      hidden: !this.props.active
+    }
+
+    return (
+      <div className={classnames(classes)}>
+        <h2>{text}</h2>
+
+        <ul>{optionComponents}</ul>
+      </div>
+    )
+  }
 }
 
 MultipleChoiceQuestion.propTypes = {
   question: PropTypes.object.isRequired,
+  questionIndex: PropTypes.number.isRequired,
   onOptionSelect: PropTypes.func
 }
 

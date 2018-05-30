@@ -26,12 +26,17 @@ describe('Quiz', () => {
     return mount(<Quiz {...quiz} />)
   }
 
-  beforeEach(() => {})
+  beforeEach(() => {
+    mountedQuiz = quizComp()
+  })
 
   it('renders a component for each question', () => {
-    mountedQuiz = quizComp()
     expect(mountedQuiz.find('.quiz-question').length).toEqual(
       quiz.questions.length
     )
+  })
+
+  it('renders a start pane', () => {
+    expect(mountedQuiz.find('.quiz-start-pane').length).toBe(1)
   })
 })
