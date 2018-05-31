@@ -15,7 +15,12 @@ const StartPane = props => {
   )
 }
 
+StartPane.defaultProps = {
+  active: false
+}
+
 StartPane.propTypes = {
+  active: PropTypes.bool.isRequired,
   onStart: PropTypes.func.isRequired
 }
 
