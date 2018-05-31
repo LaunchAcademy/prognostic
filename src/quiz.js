@@ -33,3 +33,15 @@ export const answerQuestion = (quiz, question, answer) => {
     }
   }
 }
+
+export const submitLead = (quiz, lead) => {
+  const response = quiz.response || {}
+  return {
+    ...quiz,
+    response: {
+      ...response,
+      lead: lead,
+      completedAt: new Date()
+    }
+  }
+}

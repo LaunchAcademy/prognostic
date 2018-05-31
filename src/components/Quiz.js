@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 
 import MultipleChoiceQuestion from './MultipleChoiceQuestion'
 import StartPane from './StartPane'
+import LeadPane from './LeadPane'
 
-import { initQuiz, startQuiz, answerQuestion } from '../quiz'
+import { initQuiz, startQuiz, answerQuestion, submitLead } from '../quiz'
 
 class Quiz extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class Quiz extends Component {
     this.onStart = this.onStart.bind(this)
     this.onOptionSelect = this.onOptionSelect.bind(this)
     this.buildQuestionComponents = this.buildQuestionComponents.bind(this)
+    this.onLeadSubmit = this.onLeadSubmit.bind(this)
   }
 
   onStart() {
@@ -30,8 +32,18 @@ class Quiz extends Component {
     })
   }
 
+  onLeadSubmit(lead) {
+    this.setState({
+      quiz: submitLead(this.state.quiz, lead)
+    })
+  }
+
   showStartPane() {
     return this.state.quiz.questionIndex === -1
+  }
+
+  showLeadPane() {
+    return this.state.quiz.questionIndex === this.props.questions.length
   }
 
   buildQuestionComponents() {
@@ -62,6 +74,7 @@ class Quiz extends Component {
           onStart={this.onStart}
         />
         {questionComponents}
+        <LeadPane active={this.showLeadPane()} onSubmit={this.onLeadSubmit} />
       </div>
     )
   }
