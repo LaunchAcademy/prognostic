@@ -41,27 +41,33 @@ class LeadPane extends Component {
     return (
       <div className={classnames(classes)}>
         <form action="#" onSubmit={this.submit}>
-          <input
-            type="email"
-            name="email"
-            placeholder="Your email..."
-            value={lead.email}
-            onChange={this.updateLead}
-          />
-          <input
-            type="text"
-            name="firstName"
-            value={lead.firstName}
-            onChange={this.updateLead}
-            placeholder="Your first name..."
-          />
-          <input
-            type="text"
-            name="lastName"
-            value={lead.lastName}
-            onChange={this.updateLead}
-            placeholder="Your last name..."
-          />
+          <div>
+            <input
+              type="email"
+              name="email"
+              placeholder="Your email..."
+              value={lead.email}
+              onChange={this.updateLead}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="firstName"
+              value={lead.firstName}
+              onChange={this.updateLead}
+              placeholder="Your first name..."
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="lastName"
+              value={lead.lastName}
+              onChange={this.updateLead}
+              placeholder="Your last name..."
+            />
+          </div>
 
           <input type="submit" value="Show Results" />
         </form>

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import MultipleChoiceQuestion from './MultipleChoiceQuestion'
 import StartPane from './StartPane'
 import LeadPane from './LeadPane'
+import Pager from './Pager'
 
 import { initQuiz, startQuiz, answerQuestion, submitLead } from '../quiz'
 
@@ -18,7 +19,13 @@ class Quiz extends Component {
     this.onOptionSelect = this.onOptionSelect.bind(this)
     this.buildQuestionComponents = this.buildQuestionComponents.bind(this)
     this.onLeadSubmit = this.onLeadSubmit.bind(this)
+    this.pageForward = this.pageForward.bind(this)
+    this.pageBack = this.pageBack.bind(this)
   }
+
+  pageForward() {}
+
+  pageBack() {}
 
   onStart() {
     this.setState({
@@ -75,6 +82,12 @@ class Quiz extends Component {
         />
         {questionComponents}
         <LeadPane active={this.showLeadPane()} onSubmit={this.onLeadSubmit} />
+        <Pager
+          paneIndex={this.state.quiz.paneIndex}
+          paneCeiling={this.props.questions.length}
+          onForward={this.pageForward}
+          onBack={this.pageBack}
+        />
       </div>
     )
   }
