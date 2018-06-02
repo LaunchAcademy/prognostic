@@ -10,7 +10,8 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/dist/'
+    publicPath: '/dist/',
+    devtoolModuleFilenameTemplate: '/[absolute-resource-path]'
   },
   plugins: [new webpack.HotModuleReplacementPlugin()],
   resolve: {

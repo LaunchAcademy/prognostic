@@ -1,22 +1,13 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { render } from 'react-dom'
 
-import { Quiz } from '../../../src/index'
-//TODO: fix this path issue
-// import { Quiz } from 'prognostic'
+import App from './App'
+import { default as RedBox } from 'redbox-react'
 
-const quiz = {
-  title: 'Preferences',
-  questions: [
-    {
-      text: 'What is your favorite color?',
-      options: ['Red', 'Green', 'Blue']
-    },
-    {
-      text: 'What is your favorite food?',
-      options: ['Pizza', 'Chicken', 'Green Beans']
-    }
-  ]
+const root = document.getElementById('app')
+
+try {
+  render(<App />, root)
+} catch (e) {
+  render(<RedBox useLines={false} error={e} />, root)
 }
-
-ReactDOM.render(<Quiz {...quiz} />, document.getElementById('app'))
