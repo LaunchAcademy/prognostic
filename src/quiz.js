@@ -3,14 +3,14 @@ import { makeResponse } from './response'
 export const initQuiz = quiz => {
   return {
     ...quiz,
-    questionIndex: -1
+    paneIndex: -1
   }
 }
 
 export const startQuiz = quiz => {
   return {
     ...quiz,
-    questionIndex: 0,
+    paneIndex: 0,
     response: {
       startedAt: new Date()
     }
@@ -19,16 +19,16 @@ export const startQuiz = quiz => {
 
 export const answerQuestion = (quiz, question, answer) => {
   const response = quiz.response || {}
-  const questionIndex = quiz.questionIndex
+  const paneIndex = quiz.paneIndex
   const questionResponses = response.questionResponses || []
   return {
     ...quiz,
-    questionIndex: questionIndex + 1,
+    paneIndex: paneIndex + 1,
     response: {
       ...response,
       questionResponses: {
         ...questionResponses,
-        [questionIndex]: makeResponse(question, answer)
+        [paneIndex]: makeResponse(question, answer)
       }
     }
   }

@@ -1,9 +1,9 @@
 import * as quiz from 'quiz'
 
 describe('initializing a quiz', () => {
-  it('assigns a questionIndex of -1', () => {
+  it('assigns a paneIndex of -1', () => {
     const aQuiz = quiz.initQuiz({})
-    expect(aQuiz.questionIndex).toBe(-1)
+    expect(aQuiz.paneIndex).toBe(-1)
   })
 })
 
@@ -43,8 +43,8 @@ describe('anwering a question', () => {
     resultingQuiz = quiz.answerQuestion(aQuiz, question, answer)
   })
 
-  it('increments the questionIndex', () => {
-    expect(resultingQuiz.questionIndex).toBe(1)
+  it('increments the paneIndex', () => {
+    expect(resultingQuiz.paneIndex).toBe(1)
   })
 
   it('appends an answer to the response', () => {

@@ -39,11 +39,11 @@ class Quiz extends Component {
   }
 
   showStartPane() {
-    return this.state.quiz.questionIndex === -1
+    return this.state.quiz.paneIndex === -1
   }
 
   showLeadPane() {
-    return this.state.quiz.questionIndex === this.props.questions.length
+    return this.state.quiz.paneIndex === this.props.questions.length
   }
 
   buildQuestionComponents() {
@@ -53,7 +53,7 @@ class Quiz extends Component {
       const newComponent = (
         <MultipleChoiceQuestion
           key={i}
-          active={this.state.quiz.questionIndex === i}
+          active={this.state.quiz.paneIndex === i}
           onOptionSelect={this.onOptionSelect}
           questionIndex={i}
           question={questions[i]}
