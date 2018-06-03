@@ -10,7 +10,11 @@ describe('Option List Item', () => {
 
   beforeAll(() => {
     optionListItem = mount(
-      <OptionListItem onOptionSelect={optionSelect} option={optionText} />
+      <OptionListItem
+        onOptionSelect={optionSelect}
+        option={optionText}
+        selected={true}
+      />
     )
   })
 
@@ -28,5 +32,14 @@ describe('Option List Item', () => {
     const anchor = optionListItem.find('a').first()
     anchor.simulate('click')
     expect(optionSelect.mock.calls).toContainEqual([optionText])
+  })
+
+  it('sets the selected classname if the option is selected', () => {
+    expect(
+      optionListItem
+        .find('li')
+        .first()
+        .hasClass('selected')
+    ).toBe(true)
   })
 })

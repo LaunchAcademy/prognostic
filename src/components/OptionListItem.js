@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 class OptionListItem extends Component {
   constructor(props) {
@@ -13,8 +14,12 @@ class OptionListItem extends Component {
   }
 
   render() {
+    const classes = {
+      'quiz-option': true,
+      selected: this.props.selected
+    }
     return (
-      <li className="quiz-option">
+      <li className={classnames(classes)}>
         <a href="#" onClick={this.onClick}>
           {this.props.option}
         </a>
@@ -23,9 +28,14 @@ class OptionListItem extends Component {
   }
 }
 
+OptionListItem.defaultProps = {
+  selected: false
+}
+
 OptionListItem.propTypes = {
   option: PropTypes.string.isRequired,
-  onOptionSelect: PropTypes.func
+  onOptionSelect: PropTypes.func,
+  selected: PropTypes.bool
 }
 
 export default OptionListItem

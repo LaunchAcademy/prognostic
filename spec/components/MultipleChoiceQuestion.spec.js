@@ -40,4 +40,16 @@ describe('MultipleChoiceQuestion', () => {
         .text()
     ).toEqual(question.options[0])
   })
+
+  it('selects an option if it matches the response', () => {
+    props = {
+      response: {
+        answer: 'Red'
+      },
+      ...props
+    }
+    mountedQuestion = shallowQuestion()
+    const redOption = mountedQuestion.find('OptionListItem').first()
+    expect(redOption.props().selected).toBe(true)
+  })
 })

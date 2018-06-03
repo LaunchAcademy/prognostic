@@ -20,9 +20,12 @@ class MultipleChoiceQuestion extends Component {
     let i = 0
     return options.map(option => {
       i++
+      const { answer: responseText } = this.props.response
+      const selected = responseText && option === responseText
       return (
         <OptionListItem
           key={i}
+          selected={selected}
           onOptionSelect={this.optionSelect}
           option={option}
         />
@@ -55,7 +58,12 @@ class MultipleChoiceQuestion extends Component {
 MultipleChoiceQuestion.propTypes = {
   question: PropTypes.object.isRequired,
   questionIndex: PropTypes.number.isRequired,
-  onOptionSelect: PropTypes.func
+  onOptionSelect: PropTypes.func,
+  response: PropTypes.object
+}
+
+MultipleChoiceQuestion.defaultProps = {
+  response: {}
 }
 
 export default MultipleChoiceQuestion

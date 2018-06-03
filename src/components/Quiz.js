@@ -71,13 +71,23 @@ class Quiz extends Component {
 
   buildQuestionComponents() {
     let componentArray = []
+    const { quiz } = this.state
+    let questionResponses = {}
+    if (quiz.response && quiz.response.questionResponses) {
+      questionResponses = quiz.response.questionResponses
+    }
     const { questions } = this.props
     for (let i = 0; i < questions.length; i++) {
+      let resp = {}
+      if (questionResponses && questionResponses[i]) {
+        resp = questionResponses[i]
+      }
       const newComponent = (
         <MultipleChoiceQuestion
           key={i}
-          active={this.state.quiz.paneIndex === i}
+          active={quiz.paneIndex === i}
           onOptionSelect={this.onOptionSelect}
+          response={resp}
           questionIndex={i}
           question={questions[i]}
         />
