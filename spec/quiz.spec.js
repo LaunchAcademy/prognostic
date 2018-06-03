@@ -53,3 +53,11 @@ describe('anwering a question', () => {
     expect(newQuiz.response.questionResponses['0']).toBeDefined()
   })
 })
+
+describe('setting quiz pane', () => {
+  it('updates the paneIndex based on the supplied arg', () => {
+    const aQuiz = quiz.startQuiz({})
+    const resultingQuiz = quiz.setQuizPane(aQuiz, 2)
+    expect(resultingQuiz.paneIndex).toBe(2)
+  })
+})

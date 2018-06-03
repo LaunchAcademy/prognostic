@@ -6,7 +6,13 @@ import StartPane from './StartPane'
 import LeadPane from './LeadPane'
 import Pager from './Pager'
 
-import { initQuiz, startQuiz, answerQuestion, submitLead } from '../quiz'
+import {
+  initQuiz,
+  startQuiz,
+  answerQuestion,
+  submitLead,
+  setQuizPane
+} from '../quiz'
 
 class Quiz extends Component {
   constructor(props) {
@@ -23,9 +29,19 @@ class Quiz extends Component {
     this.pageBack = this.pageBack.bind(this)
   }
 
-  pageForward() {}
+  pageForward() {
+    const { quiz } = this.state
+    this.setState({
+      quiz: setQuizPane(quiz, quiz.paneIndex + 1)
+    })
+  }
 
-  pageBack() {}
+  pageBack() {
+    const { quiz } = this.state
+    this.setState({
+      quiz: setQuizPane(quiz, quiz.paneIndex - 1)
+    })
+  }
 
   onStart() {
     this.setState({

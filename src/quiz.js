@@ -45,3 +45,10 @@ export const submitLead = (quiz, lead) => {
     }
   }
 }
+
+export const setQuizPane = (quiz, paneIndex) => {
+  return {
+    ...quiz,
+    paneIndex: paneIndex
+  }
+}
