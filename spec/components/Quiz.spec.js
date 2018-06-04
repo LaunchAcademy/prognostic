@@ -5,7 +5,7 @@ import { startQuiz, answerQuestion } from 'quiz'
 import Quiz from 'components/Quiz'
 import MultipleChoiceQuestion from 'components/MultipleChoiceQuestion'
 
-const quiz = {
+const quizProps = {
   title: 'Preferences',
   questions: [
     {
@@ -16,7 +16,9 @@ const quiz = {
       text: 'What is your favorite food?',
       options: ['Pizza', 'Chicken', 'Green Beans']
     }
-  ]
+  ],
+  onLeadSubmit: jest.fn(),
+  onOptionSelect: jest.fn()
 }
 
 describe('Quiz', () => {
@@ -24,7 +26,7 @@ describe('Quiz', () => {
   let mountedQuiz
 
   const quizComp = () => {
-    return mount(<Quiz {...quiz} />)
+    return mount(<Quiz {...quizProps} />)
   }
 
   beforeEach(() => {
@@ -33,12 +35,26 @@ describe('Quiz', () => {
 
   it('renders a component for each question', () => {
     expect(mountedQuiz.find('.quiz-question').length).toEqual(
-      quiz.questions.length
+      quizProps.questions.length
     )
   })
 
   it('renders a start pane', () => {
     expect(mountedQuiz.find('.quiz-start-pane').length).toBe(1)
+  })
+
+  it('triggers an onLeadSubmit custom event', () => {
+    const lead = {}
+    mountedQuiz.instance().onLeadSubmit(lead)
+    expect(quizProps.onLeadSubmit.mock.calls.length).toBe(1)
+  })
+
+  it('triggers an onOptionSelect custom event', () => {
+    const question = quizProps.questions[0]
+    const answer = quizProps.questions[0].options[0]
+
+    mountedQuiz.instance().onOptionSelect(question, answer)
+    expect(quizProps.onOptionSelect.mock.calls.length).toBe(1)
   })
 })
 
@@ -48,8 +64,12 @@ describe('quiz questions', () => {
   let halfwayDoneQuiz
 
   const quizComp = () => {
-    halfwayDoneQuiz = answerQuestion(startQuiz({}), quiz.questions[0], 'Red')
-    const quizInstance = shallow(<Quiz {...quiz} />)
+    halfwayDoneQuiz = answerQuestion(
+      startQuiz({}),
+      quizProps.questions[0],
+      'Red'
+    )
+    const quizInstance = shallow(<Quiz {...quizProps} />)
     quizInstance.setState({ quiz: halfwayDoneQuiz })
     return quizInstance
   }

@@ -53,12 +53,18 @@ class Quiz extends Component {
     this.setState({
       quiz: answerQuestion(this.state.quiz, question, option)
     })
+    if (this.props.onOptionSelect) {
+      this.props.onOptionSelect(this.state.quiz, question, option)
+    }
   }
 
   onLeadSubmit(lead) {
     this.setState({
       quiz: submitLead(this.state.quiz, lead)
     })
+    if (this.props.onLeadSubmit) {
+      this.props.onLeadSubmit(this.state.quiz)
+    }
   }
 
   showStartPane() {
