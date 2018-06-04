@@ -23,7 +23,7 @@ export default class Pager extends Component {
   }
 
   forwardPagerEnabled() {
-    return this.props.paneIndex < this.props.paneCeiling
+    return this.props.canMoveForward
   }
 
   showPager() {

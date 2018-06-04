@@ -61,3 +61,31 @@ describe('setting quiz pane', () => {
     expect(resultingQuiz.paneIndex).toBe(2)
   })
 })
+
+describe('moving forward', () => {
+  const question = {
+    text: 'What is your favorite color?'
+  }
+
+  const answer = 'Red'
+  let resultingQuiz
+  let aQuiz
+
+  beforeEach(() => {
+    aQuiz = quiz.startQuiz({})
+    resultingQuiz = quiz.answerQuestion(aQuiz, question, answer)
+  })
+
+  it('can move forward if I have answered more questions than the one I am on', () => {
+    resultingQuiz.paneIndex = 0
+    expect(quiz.canMoveForward(resultingQuiz, 1)).toBe(true)
+  })
+
+  it('cannot move forward if I am on the leadPane', () => {
+    expect(quiz.canMoveForward(resultingQuiz, 1)).toBe(false)
+  })
+
+  it('cannot move forward if I have not answered the current question', () => {
+    expect(quiz.canMoveForward(aQuiz, 1)).toBe(false)
+  })
+})

@@ -3,7 +3,8 @@ import { makeResponse } from './response'
 export const initQuiz = quiz => {
   return {
     ...quiz,
-    paneIndex: -1
+    paneIndex: -1,
+    response: {}
   }
 }
 
@@ -50,5 +51,18 @@ export const setQuizPane = (quiz, paneIndex) => {
   return {
     ...quiz,
     paneIndex: paneIndex
+  }
+}
+
+export const canMoveForward = (quiz, numQuestions) => {
+  const {
+    paneIndex,
+    response: { questionResponses }
+  } = quiz
+  if (questionResponses) {
+    const numResponses = Object.keys(questionResponses).length
+    return numResponses > paneIndex && paneIndex !== numQuestions
+  } else {
+    return false
   }
 }

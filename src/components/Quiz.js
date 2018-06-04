@@ -103,6 +103,21 @@ class Quiz extends Component {
     return componentArray
   }
 
+  canMoveForward() {
+    const {
+      paneIndex,
+      response: { questionResponses }
+    } = this.state.quiz
+    if (questionResponses) {
+      return (
+        Object.keys(questionResponses).length > paneIndex &&
+        !this.showLeadPane()
+      )
+    } else {
+      return false
+    }
+  }
+
   render() {
     const questionComponents = this.buildQuestionComponents()
     return (
@@ -117,12 +132,17 @@ class Quiz extends Component {
         <Pager
           paneIndex={this.state.quiz.paneIndex}
           paneCeiling={this.props.questions.length}
+          canMoveForward={this.canMoveForward()}
           onForward={this.pageForward}
           onBack={this.pageBack}
         />
       </div>
     )
   }
+}
+
+Quiz.defaultProps = {
+  quiz: {}
 }
 
 Quiz.propTypes = {
