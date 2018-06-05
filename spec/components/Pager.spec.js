@@ -12,6 +12,7 @@ describe('Pager', () => {
     props = {
       paneIndex: 1,
       paneCeiling: 3,
+      canMoveForward: true,
       onBack,
       onForward
     }
@@ -52,8 +53,8 @@ describe('Pager', () => {
     expect(backBtn.is('[disabled]')).toBe(true)
   })
 
-  it('disabled the forwardButton when I am at paneCeiling', () => {
-    props.paneIndex = props.paneCeiling
+  it('disabled the forwardButton when canForward is false', () => {
+    props.canMoveForward = false
     mountPager()
     const backBtn = pager.find('button.pane-forward')
     expect(backBtn.is('[disabled]')).toBe(true)
