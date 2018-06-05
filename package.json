@@ -43,7 +43,8 @@
     "precommit": "lint-staged",
     "test": "node_modules/.bin/jest",
     "test:dev": "node_modules/.bin/jest --watch",
-    "test:debug": "node inspect ./node_modules/.bin/jest -i --watch"
+    "test:debug": "node inspect ./node_modules/.bin/jest -i --watch",
+    "test:coverage": "node_modules/.bin/jest --coverage"
   },
   "lint-staged": {
     "*.{js,json,css,md}": [
