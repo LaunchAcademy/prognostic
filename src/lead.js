@@ -2,7 +2,8 @@ export const initLead = () => {
   return {
     firstName: '',
     lastName: '',
-    email: ''
+    email: '',
+    errors: {}
   }
 }
 
