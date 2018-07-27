@@ -15,7 +15,7 @@ class LeadPane extends Component {
     }
 
     this.submit = this.submit.bind(this)
-    this.updateLead = this.updateLead.bind(this)
+    this.changeLead = this.changeLead.bind(this)
     this.validateField = this.validateField.bind(this)
   }
 
@@ -24,29 +24,24 @@ class LeadPane extends Component {
     this.props.onSubmit(this.state.lead)
   }
 
-  updateLead(e) {
+  changeLead(e) {
     const {
       target: { name, value }
     } = e
     const oldLead = this.state.lead
-    if (this.validateField()) {
-      this.setState({
-        lead: updateLead(oldLead, { [name]: value })
-      })
-    }
+    this.setState({
+      lead: {
+        ...updateLead(oldLead, { [name]: value }),
+        errors: {email: this.validateField()}
+      }
+    })
   }
 
   //since email is the only validated field, we can assume it's email
   validateField(e) {
     let errors = []
     const { lead } = this.state
-    errors = validateEmail(errors, lead.email)
-    this.setState({
-      lead: {
-        ...lead,
-        errors: { email: errors }
-      }
-    })
+    return validateEmail(errors, lead.email)
   }
 
   render() {
@@ -68,7 +63,7 @@ class LeadPane extends Component {
               placeholder="Your email..."
               value={lead.email}
               onBlur={this.validateField}
-              onChange={this.updateLead}
+              onChange={this.changeLead}
             />
           </ValidatedField>
           <div>
@@ -76,7 +71,7 @@ class LeadPane extends Component {
               type="text"
               name="firstName"
               value={lead.firstName}
-              onChange={this.updateLead}
+              onChange={this.changeLead}
               placeholder="Your first name (optional)..."
             />
           </div>
@@ -85,7 +80,7 @@ class LeadPane extends Component {
               type="text"
               name="lastName"
               value={lead.lastName}
-              onChange={this.updateLead}
+              onChange={this.changeLead}
               placeholder="Your last name (optional)..."
             />
           </div>
